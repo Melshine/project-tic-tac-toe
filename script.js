@@ -1,3 +1,5 @@
+"use strict"
+
 const Gameboard = (function (size = 3) {
     function createBoard() {
         const board = new Array(size).fill().map(row => new Array(size).fill())
@@ -160,11 +162,13 @@ const Game = function () {
 
         const message = Message(document.querySelector('.message'))
         const players = [playerA, playerB]
-        let isGameEnded = false
+        
 
         restart()
 
         function restart(){
+            let isGameEnded = false
+            Gameboard.clean()
             UIBoard.remove()
             UIBoard.create()
             const cells = document.querySelectorAll('.cell')
@@ -205,7 +209,6 @@ const Game = function () {
             button.classList.add('restart')
             button.onclick = function(){
                 button.parentElement.removeChild(button)
-                isGameEnded = false
                 restart()
             }
             const main = document.querySelector('.main')
